@@ -13,10 +13,24 @@ app.get("/", (req, res) => {
   try {
     res.send(data);
   } catch (e) {
-    res.status(500).send('Internal server error: ' + e.message);
+    console.log(e);
+    res.status(500).send("Internal server error: " + e.message);
   }
 });
-app.post("/", () => {});
+
+app.post("/", (req, res) => {
+    console.log(req.body);
+  try {
+    const [entry] = req.body;
+
+    data.push(entry);
+
+    res.status(200).send("Form submitted successfully");
+  } catch (e) {
+    console.log(e);
+    res.status(500).send("Internal server error");
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);
