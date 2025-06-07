@@ -1,16 +1,21 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { data } from "./models/data.js";
+import connectDB from "./config/db.js";
+import Entry from "./models/entry.js";
 import "dotenv/config";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Connect to DB
+connectDB();
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   try {
+    const data = await Entry.find();
     res.send(data);
   } catch (e) {
     console.log(e);
@@ -18,13 +23,10 @@ app.get("/", (req, res) => {
   }
 });
 
-app.post("/", (req, res) => {
-    console.log(req.body);
+app.post("/", async (req, res) => {
+  const [entry] = req.body;
   try {
-    const [entry] = req.body;
-
-    data.push(entry);
-
+    await Entry.create({ ...entry });
     res.status(200).send("Form submitted successfully");
   } catch (e) {
     console.log(e);

@@ -1,4 +1,4 @@
-export const data = [
+export const testData = [
   {
     id: "b1f2c230-9a1d-4f13-bd8f-8f1ec77a3e11",
     timestamp: "2025-06-05T17:00:00.000Z",
