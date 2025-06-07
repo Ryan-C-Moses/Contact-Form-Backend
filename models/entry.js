@@ -7,8 +7,7 @@ const entrySchema = new Schema({
     firstName: String,
     lastName: String,
     email: String,
-    generalEnquiry: Boolean,
-    supportRequest: Boolean,
+    queryType: String,
     message: String,
     consent: Boolean
 });

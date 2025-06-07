@@ -8,8 +8,8 @@ const connectDB = async () => {
     console.log(`MongoDB Connected: ${conn.connection.host}`);
 
     mongoose.connection.on("error", (err) => {
-      console.log("Error after connection: " + error.message);
-      console.log("\n" + error);
+      console.log("Error after connection: " + err.message);
+      console.log("\n" + err);
     });
   } catch (error) {
     console.log("Error with Database connection: " + error.message);
